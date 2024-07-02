@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id        Int       @id @unique @default(autoincrement())
+  username  String    @unique
+  password  String
+  name      String
+  avatar    String?
+  active    Boolean?  @default(true)
+  articles  article[]
+  pages     page[]
+  faqs      faq[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model module {
+  id        Int       @id @unique @default(autoincrement())
+  name      String
+  slug      String    @unique
+  active    Boolean?  @default(true)
+  sections  section[]
+  articles  article[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model section {
+  id        Int       @id @unique @default(autoincrement())
+  moduleId  Int
+  name      String
+  slug      String
+  active    Boolean?  @default(true)
+  module    module    @relation(fields: [moduleId], references: [id])
+  articles  article[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model article {
+  id        Int        @id @unique @default(autoincrement())
+  userId    Int
+  moduleId  Int?
+  sectionId Int?
+  name      String
+  slug      String     @unique
+  content   String
+  active    Boolean?   @default(false)
+  views     Int?       @default(0)
+  user      user       @relation(fields: [userId], references: [id])
+  module    module?    @relation(fields: [moduleId], references: [id])
+  section   section?   @relation(fields: [sectionId], references: [id])
+  feedbacks feedback[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model page {
+  id        Int      @id @unique @default(autoincrement())
+  userId    Int
+  icon      String
+  name      String
+  slug      String   @unique
+  content   String
+  active    Boolean? @default(false)
+  views     Int?     @default(0)
+  user      user     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model faq {
+  id        Int        @id @unique @default(autoincrement())
+  userId    Int
+  ask       String
+  slug      String     @unique
+  answer    String
+  active    Boolean?   @default(false)
+  views     Int?       @default(0)
+  user      user       @relation(fields: [userId], references: [id])
+  feedbacks feedback[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model feedback {
+  id         Int      @id @unique @default(autoincrement())
+  articleId  Int?
+  faqId      Int?
+  isPositive Boolean
+  feedback   String?
+  email      String?
+  new        Boolean? @default(true)
+  article    article? @relation(fields: [articleId], references: [id])
+  faq        faq?     @relation(fields: [faqId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
