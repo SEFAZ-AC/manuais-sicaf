@@ -1,6 +1,7 @@
 import { dateFormatter } from "@/utils/dateFormatter";
 import GenericAvatarImage from "./GenericAvatarImage";
 import Image from "next/image";
+import { getBasePath } from "@/utils/getBasePath";
 
 const AuthorIdentification = ({
   name,
@@ -21,7 +22,7 @@ const AuthorIdentification = ({
               <Image
                 width={500}
                 height={500}
-                src={avatar}
+                src={getBasePath() + avatar}
                 alt="Avatar do usuário"
               />
             ) : (

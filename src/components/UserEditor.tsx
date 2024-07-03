@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdateUserSchema, updateUserSchema } from "@/utils/validators";
 import { useEffect, useState } from "react";
 import { uploadImageByFile } from "@/services/fileService";
+import { getBasePath } from "@/utils/getBasePath";
 
 const UserEditor = ({
   user,
@@ -101,12 +102,12 @@ const UserEditor = ({
         <div className="relative min-w-[300px] w-fit">
           {user.avatar || newAvatarURL ? (
             <Image
-              src={newAvatarURL || user.avatar!}
+              src={newAvatarURL || getBasePath() + user.avatar!}
               width={300}
               height={300}
               className="shadow-2xl avatar rounded-full aspect-square object-cover"
               alt="Seu avatar"
-              unoptimized={!!newAvatarURL}
+              unoptimized={true}
             />
           ) : (
             <GenericAvatarImage />
