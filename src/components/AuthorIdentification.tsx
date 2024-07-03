@@ -24,6 +24,7 @@ const AuthorIdentification = ({
                 height={500}
                 src={getBasePath() + avatar}
                 alt="Avatar do usuário"
+                unoptimized={true}
               />
             ) : (
               <GenericAvatarImage />

@@ -99,7 +99,7 @@ const List = ({ data }: { data: ListData }) => {
 const Attaches = ({ data }: { data: AttachesData }) => (
   <Link
     className="mx-auto my-4 w-full max-w-[90%] shadow-lg alert border-base-content border-opacity-50 flex gap-3 items-center"
-    href={data.file.url}
+    href={data.file.pureUrl}
     download
     target="_blank"
   >
@@ -121,8 +121,9 @@ const ImageBlock = ({ data }: { data: ImageData }) => (
       width={2000}
       height={2000}
       alt={data.caption}
-      src={getBasePath() + data.file.url}
+      src={getBasePath() + data.file.pureUrl}
       className="object-contain w-fit h-full max-h-[70vh] 2xl:max-w-[90%] 3xl:max-w-[80%] mx-auto"
+      unoptimized={true}
     />
     <figcaption className="bg-base-100 mt-3 text-xs italic text-gray-500 text-center">
       {data.caption}

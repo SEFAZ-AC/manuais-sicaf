@@ -54,6 +54,7 @@ const JointSignature = ({
           height={2000}
           alt="Assinatura da Sefaz com o brasão do Estado do Acre e o slogan de governo."
           className="object-contain w-full h-full"
+          unoptimized={true}
         />
       ) : (
         ""

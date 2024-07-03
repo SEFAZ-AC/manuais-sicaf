@@ -31,6 +31,7 @@ interface ListData {
 interface AttachesData {
   file: {
     url: string;
+    pureUrl: string;
     size: number;
     name: string;
     title: string;
@@ -41,6 +42,7 @@ interface AttachesData {
 interface ImageData {
   file: {
     url: string;
+    pureUrl: string;
   };
   caption: string;
   withBorder: boolean;
