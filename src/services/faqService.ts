@@ -1,7 +1,7 @@
-'use server'
+"use server";
 
-import { revalidatePath } from 'next/cache'
-import db from '../lib/db'
+import { revalidatePath } from "next/cache";
+import db from "../lib/db";
 
 export async function getFaqs() {
   return await db.faq.findMany({
@@ -20,18 +20,20 @@ export async function getFaqs() {
       updatedAt: true,
     },
     orderBy: {
-      views: 'desc',
+      views: "desc",
     },
-  })
+  });
 }
 
 export async function incrementFaqViews(id: number) {
-  return await db.faq.update({
-    where: { id },
-    data: {
-      views: { increment: 1 },
-    },
-  })
+  try {
+    return await db.faq.update({
+      where: { id },
+      data: {
+        views: { increment: 1 },
+      },
+    });
+  } catch (e) {}
 }
 
 export async function adGetFaqs() {
@@ -51,9 +53,9 @@ export async function adGetFaqs() {
       updatedAt: true,
     },
     orderBy: {
-      views: 'desc',
+      views: "desc",
     },
-  })
+  });
 }
 
 export async function adCreateFaq(
@@ -64,23 +66,23 @@ export async function adCreateFaq(
 ) {
   await db.faq.create({
     data: { userId, ask: newAsk, slug: newSlug, answer: newAnswer },
-  })
-  revalidatePath('/')
-  return
+  });
+  revalidatePath("/");
+  return;
 }
 
 export async function adToggleFaqVisibility(id: number) {
   const faq = await db.faq.findFirst({
     where: { id },
     select: { active: true },
-  })
+  });
   if (!faq) {
-    revalidatePath('/')
-    return
+    revalidatePath("/");
+    return;
   }
-  await db.faq.update({ where: { id }, data: { active: !faq.active } })
-  revalidatePath('/')
-  return !faq.active
+  await db.faq.update({ where: { id }, data: { active: !faq.active } });
+  revalidatePath("/");
+  return !faq.active;
 }
 
 export async function adUpdateFaq(
@@ -93,15 +95,15 @@ export async function adUpdateFaq(
   await db.faq.update({
     where: { id },
     data: { userId, ask: newAsk, slug: newSlug, answer: newAnswer },
-  })
-  revalidatePath('/')
-  return
+  });
+  revalidatePath("/");
+  return;
 }
 
 export async function adDeleteFaq(id: number) {
   await db.faq.delete({
     where: { id },
-  })
-  revalidatePath('/')
-  return
+  });
+  revalidatePath("/");
+  return;
 }
