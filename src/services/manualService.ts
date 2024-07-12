@@ -170,6 +170,7 @@ export async function adUpdateArticle(
       userId,
       moduleId: !newSectionId ? newModuleId : null,
       sectionId: newSectionId,
+      updatedAt: new Date(),
     },
   });
   revalidatePath("/");

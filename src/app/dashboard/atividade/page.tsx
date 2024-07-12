@@ -11,7 +11,7 @@ const ActivityPage = async () => {
   const metrics = await getFeedbackMetrics();
   return (
     <div className="flex flex-col items-center justify-start flex-1 w-full h-full min-h-[95vh]">
-      <ActivityPanel metrics={metrics} />
+      <ActivityPanel isAdmin={session.user.admin} metrics={metrics} />
       <AdminPageTitlePortal text="Atividade e Feedback" icon="activity" />
     </div>
   );

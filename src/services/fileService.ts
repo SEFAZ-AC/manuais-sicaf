@@ -57,7 +57,6 @@ export async function uploadFile(formData: FormData) {
         "./public",
         `${getBasePath()}/api/files`
       )}/${newFileName}`,
-      pureUrl: `${dirPath.replace("./public", "/api/files")}/${newFileName}`,
       size: file.size,
       name: fileName,
       extension: fileExtension,
@@ -101,7 +100,6 @@ export async function uploadImageByFile(formData: FormData) {
         "./public",
         `${getBasePath()}/api/files`
       )}/${newFileName}`,
-      pureUrl: `${dirPath.replace("./public", "/api/files")}/${newFileName}`,
     },
   };
 }
@@ -155,7 +153,6 @@ export async function uploadImageByUrl(formData: FormData) {
         "./public",
         `${getBasePath()}/api/files`
       )}/${newFileName}`,
-      pureUrl: `${dirPath.replace("./public", "/api/files")}/${newFileName}`,
     },
   };
 }

@@ -18,7 +18,7 @@ const TopBar = async () => {
         </div>
         {session ? (
           <div className="hidden lg:block">
-            <EditorModeTools />
+            <EditorModeTools admin={session.user.admin} />
           </div>
         ) : (
           <ul className="items-center hidden gap-12 lg:flex justify-center">

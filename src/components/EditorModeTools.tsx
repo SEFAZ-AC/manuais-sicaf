@@ -8,7 +8,13 @@ import { closeDrawer } from "@/utils/closeDrawer";
 import { useEffect, useState } from "react";
 import { adGetNewFeedbacksCount } from "@/services/feedbackService";
 
-const EditorModeTools = ({ mobile }: { mobile?: boolean }) => {
+const EditorModeTools = ({
+  mobile,
+  admin,
+}: {
+  mobile?: boolean;
+  admin: boolean;
+}) => {
   const [newFeedbacksCount, setNewFeedbacksCount] = useState<number | null>(
     null
   );
@@ -70,8 +76,8 @@ const EditorModeTools = ({ mobile }: { mobile?: boolean }) => {
       <li onClick={closeDrawer}>
         <LinkButton
           color="ghost"
-          tooltip="Minha Conta"
-          icon={<DynamicIcon name="user" />}
+          tooltip={admin ? "Contas de usuário" : "Minha Conta"}
+          icon={<DynamicIcon name={admin ? "users" : "user"} />}
           to="/dashboard/conta"
         />
         {pathname.includes("/dashboard/conta") ? (

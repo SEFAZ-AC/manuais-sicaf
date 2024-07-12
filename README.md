@@ -18,25 +18,13 @@
 [![Gene\ric badge](https://img.shields.io/badge/Next.js-gray?logo=nextdotjs)](https://shields.io/)
 [![Gene\ric badge](https://img.shields.io/badge/React-gray?logo=react)](https://shields.io/)
 [![Gene\ric badge](https://img.shields.io/badge/Tailwind_CSS-gray?logo=tailwindcss)](https://shields.io/)
-[![Gene\ric badge](https://img.shields.io/badge/v.-0.3.0-silver)](https://shields.io/)
+[![Gene\ric badge](https://img.shields.io/badge/v.-1.0.0-silver)](https://shields.io/)
 
 
 # manuais-sicaf
 
 
-> O **manuais-sicaf** é um guia interativo para usuários e gestores do Sistema Integrado de Contabilidade e Administração Financeira do Estado do Acre (SICAF). O projeto foi idealizado e é mantido pelo time de TI da Diretoria da Contabilidade Geral do Estado, da Secretaria da Fazenda do Estado do Acre (DICONGE-SEFAZ/AC).
-
-
-## 🗓 TODO
-
-
-O projeto está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
-
-
-- [ ] Role admin e crud de users
-- [ ] Exportar manuais em .pdf
-- [ ] Versionamento de manuais
-- [ ] Caixa de pesquisa 
+> O **manuais-sicaf** é um guia interativo para usuários e gestores do Sistema Integrado de Contabilidade e Administração Financeira do Estado do Acre (SICAF). O projeto foi idealizado e é mantido pelo time de TI da Diretoria da Contabilidade Geral do Estado, da Secretaria de Estado da Fazenda do Estado do Acre (DICONGE-SEFAZ/AC).
 
 
 ## 💻 Pré-requisitos

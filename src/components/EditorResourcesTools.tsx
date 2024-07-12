@@ -21,7 +21,7 @@ const EditorResourcesTools = ({
   return (
     <>
       {resourceIsEditing ? (
-        <div className="flex items-center justify-center gap-3 mb-3 font-normal">
+        <div className="w-fit flex items-center justify-center gap-3 mb-3 font-normal">
           <ActionButton
             color="primary"
             text="Salvar"
@@ -37,7 +37,7 @@ const EditorResourcesTools = ({
           />
         </div>
       ) : (
-        <div className="flex items-center justify-end gap-3 mb-3 font-normal">
+        <div className="w-fit flex items-center justify-end gap-3 mb-3 font-normal">
           {resourceIsActive ? (
             <ActionButton
               color="success"

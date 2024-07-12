@@ -5,7 +5,7 @@ import ContentParser from "./ContentParser";
 import FeedbackForm from "./FeedbackForm";
 import { useEffect, useState } from "react";
 import { incrementFaqViews } from "@/services/faqService";
-import AuthorIdentification from "./AuthorIdentification";
+import AuthorAndDateIdentification from "./AuthorAndDateIdentification";
 
 const FaqAccordion = ({
   item,
@@ -38,7 +38,7 @@ const FaqAccordion = ({
         setActiveAccordion(item.id);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item.id, item.slug, params]);
   return (
     <>
@@ -65,18 +65,13 @@ const FaqAccordion = ({
       <div className="collapse-content bg-base-200 border-b border-s border-e border-primary rounded-b-box">
         <div className="pt-6">
           <ContentParser data={item.answer} />
-          {!admin ? (
-            <>
-              <AuthorIdentification
-                name={item.user.name}
-                avatar={item.user.avatar}
-                date={item.updatedAt}
-              />
-              <FeedbackForm resource="faq" resourceId={item.id} />
-            </>
-          ) : (
-            ""
-          )}
+          <div className="divider m-0 p-0"></div>
+          <AuthorAndDateIdentification
+            name={item.user.name}
+            avatar={item.user.avatar}
+            date={item.updatedAt}
+          />
+          {!admin ? <FeedbackForm resource="faq" resourceId={item.id} /> : ""}
         </div>
       </div>
     </>

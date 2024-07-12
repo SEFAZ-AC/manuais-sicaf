@@ -98,7 +98,7 @@ const UserEditor = ({
     }
   }, [newAvatar]);
   return (
-    <div className="hero min-h-[70vh]">
+    <div className="hero">
       <div className="hero-content flex-col items-center justify-center gap-12 xl:flex-row w-full md:max-w-[70%]">
         <div className="relative min-w-[300px] w-fit">
           {user.avatar || newAvatarURL ? (
@@ -138,7 +138,6 @@ const UserEditor = ({
           </label>
           <input
             type="text"
-            autoFocus
             {...register("name")}
             className="input text-2xl font-bold w-full text-center xl:text-start"
           />

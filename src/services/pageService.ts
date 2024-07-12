@@ -152,6 +152,7 @@ export async function adUpdateHome(newContent: string, userId: number) {
     data: {
       content: newContent,
       userId,
+      updatedAt: new Date(),
     },
   });
   revalidatePath("/");
@@ -183,6 +184,7 @@ export async function adUpdatePage(
       icon: newIcon,
       content: newContent,
       userId,
+      updatedAt: new Date(),
     },
   });
   revalidatePath("/");

@@ -2,7 +2,13 @@ import ActivityMostViewed from "./ActivityMostViewed";
 import ActivityTopbar from "./ActivityTopbar";
 import ActivityUsers from "./ActivityUsers";
 
-const ActivityPanel = ({ metrics }: { metrics: any }) => {
+const ActivityPanel = ({
+  metrics,
+  isAdmin,
+}: {
+  metrics: any;
+  isAdmin: boolean;
+}) => {
   return (
     <div className="w-full h-full flex flex-col gap-3 relative">
       <ActivityTopbar metrics={metrics} />
@@ -10,9 +16,13 @@ const ActivityPanel = ({ metrics }: { metrics: any }) => {
         <div className="w-full h-[400px] xl:h-[600px]">
           <ActivityMostViewed metrics={metrics} />
         </div>
-        <div className="w-full h-[400px] xl:h-[600px]">
-          <ActivityUsers metrics={metrics} />
-        </div>
+        {isAdmin ? (
+          <div className="w-full h-[400px] xl:h-[600px]">
+            <ActivityUsers metrics={metrics} />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

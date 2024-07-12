@@ -1,5 +1,5 @@
 import AdminPageTitlePortal from "@/components/AdminPageTitlePortal";
-import UserEditor from "@/components/UserEditor";
+import UserPanel from "@/components/UserPanel";
 import { authOptions } from "@/lib/authOptions";
 import { adGetUser } from "@/services/userService";
 import { getServerSession } from "next-auth";
@@ -12,8 +12,11 @@ const UserPage = async () => {
   if (!user) redirect("/");
   return (
     <div className="flex flex-col items-center justify-start flex-1 w-full h-full min-h-[95vh]">
-      <UserEditor user={user} />
-      <AdminPageTitlePortal text="Minha conta" icon="user" />
+      <UserPanel user={user} />
+      <AdminPageTitlePortal
+        text={session.user.admin ? "Contas de usuário" : "Minha conta"}
+        icon={session.user.admin ? "users" : "user"}
+      />
     </div>
   );
 };

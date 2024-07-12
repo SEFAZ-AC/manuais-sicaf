@@ -2,8 +2,9 @@ import { dateFormatter } from "@/utils/dateFormatter";
 import GenericAvatarImage from "./GenericAvatarImage";
 import Image from "next/image";
 import { getBasePath } from "@/utils/getBasePath";
+import DynamicIcon from "./DynamicIcon";
 
-const AuthorIdentification = ({
+const AuthorAndDateIdentification = ({
   name,
   avatar,
   date,
@@ -13,11 +14,17 @@ const AuthorIdentification = ({
   date?: Date;
 }) => {
   return (
-    <>
-      <div className="divider m-0 p-0"></div>
-      <div className="w-full flex items-center gap-3 bg-base-100 p-5">
+    <div className="text-gray-500 flex flex-col xl:flex-row gap-4 w-full items-start xl:items-center justify-between">
+      <div className="text-xs flex items-center w-fit gap-1">
+        <DynamicIcon name="clock" size="xs" />
+        <p className="italic">
+          Última atualização:{" "}
+          <span className="font-bold">{date ? dateFormatter(date) : ""}</span>
+        </p>
+      </div>
+      <div className="flex gap-3 items-center w-fit">
         <div className="avatar">
-          <div className="w-14 rounded-full ring-1 ring-base-content">
+          <div className="w-8 rounded-full ring-1 ring-base-content">
             {avatar ? (
               <Image
                 width={500}
@@ -31,16 +38,12 @@ const AuthorIdentification = ({
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="text-sm w-fit gap-2">
           <p className="font-bold">{name}</p>
-          <p className="italic text-[8pt]">
-            Última atualização:{" "}
-            <span className="font-bold">{date ? dateFormatter(date) : ""}</span>
-          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default AuthorIdentification;
+export default AuthorAndDateIdentification;

@@ -208,6 +208,10 @@ input[type="number"] {
   margin: 0 auto;
 }
 
+mark {
+  @apply bg-secondary bg-opacity-30 text-base-content;
+}
+
 .ce-toolbar__settings-btn {
   background-color: #cecece;
 }

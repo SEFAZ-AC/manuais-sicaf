@@ -29,9 +29,9 @@ interface ListData {
 }
 
 interface AttachesData {
+  title: string;
   file: {
     url: string;
-    pureUrl: string;
     size: number;
     name: string;
     title: string;
@@ -42,7 +42,6 @@ interface AttachesData {
 interface ImageData {
   file: {
     url: string;
-    pureUrl: string;
   };
   caption: string;
   withBorder: boolean;

@@ -94,7 +94,13 @@ export async function adUpdateFaq(
 ) {
   await db.faq.update({
     where: { id },
-    data: { userId, ask: newAsk, slug: newSlug, answer: newAnswer },
+    data: {
+      userId,
+      ask: newAsk,
+      slug: newSlug,
+      answer: newAnswer,
+      updatedAt: new Date(),
+    },
   });
   revalidatePath("/");
   return;

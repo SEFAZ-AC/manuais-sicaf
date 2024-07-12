@@ -6,6 +6,7 @@ declare module "next-auth" {
     username: string;
     name: string;
     avatar: string;
+    admin: boolean;
   }
 
   interface Session {
