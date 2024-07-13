@@ -29,6 +29,7 @@ interface ListData {
 }
 
 interface AttachesData {
+  title: string;
   file: {
     url: string;
     size: number;

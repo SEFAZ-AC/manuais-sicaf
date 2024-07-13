@@ -1,5 +1,3 @@
-"use client";
-
 import SidebarItem from "./SidebarItem";
 import SidebarSubSubItem from "./SidebarSubSubItem";
 import SidebarSubItem from "./SidebarSubItem";
@@ -11,14 +9,12 @@ import {
 } from "@/services/menuService";
 import { getFaqs } from "@/services/faqService";
 import CreateButton from "./CreateButton";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Loading from "@/app/(root)/loading";
 
-const AdminSidebarContent = () => {
-  const router = useRouter();
-  const [menuData, setMenuData] = useState<any>(null);
-  const [menuDataIsSet, setMenuDataIsSet] = useState<boolean>(false);
+const AdminSidebarContent = async () => {
+  const modulesTree = await adGetModulesTree();
+  const pages = await adGetPages();
+  const singleArticles = await adGetSingleArticles();
+  const faqs = await getFaqs();
   const hasActiveArticlesOrSections = (module: any) => {
     const hasActiveModuleArticles = module.articles.some(
       (article: any) => article.active
@@ -28,24 +24,8 @@ const AdminSidebarContent = () => {
     );
     return hasActiveModuleArticles || hasActiveSectionArticles;
   };
-  const fetchData = async () => {
-    if (!menuDataIsSet) {
-      const modulesTree = await adGetModulesTree();
-      const pages = await adGetPages();
-      const singleArticles = await adGetSingleArticles();
-      const faqs = await getFaqs();
-      const newData = { modulesTree, pages, singleArticles, faqs };
-      if (JSON.stringify(newData) !== JSON.stringify(menuData)) {
-        setMenuData(newData);
-        setMenuDataIsSet(true);
-      }
-    }
-  };
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return menuDataIsSet ? (
+
+  return (
     <ul className="w-full join join-vertical">
       <div className="p-3">
         <CreateButton to="/criar/pagina" text="Página" />
@@ -55,11 +35,11 @@ const AdminSidebarContent = () => {
         text="Perguntas Frequentes"
         icon="message-circle"
         link="/faq"
-        disabled={!menuData?.faqs.length || menuData.faqs.length === 0}
+        disabled={!faqs.length || faqs.length === 0}
       />
-      {menuData?.pages &&
-        menuData?.pages?.length > 0 &&
-        menuData.pages.map(
+      {pages &&
+        pages?.length > 0 &&
+        pages.map(
           (
             page: {
               name: string;
@@ -86,9 +66,9 @@ const AdminSidebarContent = () => {
       <div className="p-3">
         <CreateButton to="/criar/manual" text="Manual" />
       </div>
-      {menuData?.singleArticles &&
-        menuData?.singleArticles?.length > 0 &&
-        menuData.singleArticles.map(
+      {singleArticles &&
+        singleArticles?.length > 0 &&
+        singleArticles.map(
           (
             article: {
               name: string;
@@ -106,12 +86,11 @@ const AdminSidebarContent = () => {
             />
           )
         )}
-      {menuData?.modulesTree &&
-        menuData?.modulesTree?.length > 0 &&
-        menuData.modulesTree.map(
+      {modulesTree &&
+        modulesTree?.length > 0 &&
+        modulesTree.map(
           (
             module: {
-              id: number;
               name: string;
               active: boolean | null;
               articles: {
@@ -210,8 +189,6 @@ const AdminSidebarContent = () => {
           )
         )}
     </ul>
-  ) : (
-    <Loading />
   );
 };
 

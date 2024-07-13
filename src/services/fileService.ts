@@ -3,6 +3,7 @@
 import * as fs from "fs";
 import * as crypto from "crypto";
 import fetch from "node-fetch";
+import { getBasePath } from "@/utils/getBasePath";
 
 export async function uploadFile(formData: FormData) {
   const file = formData.get("file") as File;
@@ -52,7 +53,10 @@ export async function uploadFile(formData: FormData) {
     success: true,
     file: {
       title: fileName,
-      url: `${dirPath.replace("./public", "/api/files")}/${newFileName}`,
+      url: `${dirPath.replace(
+        "./public",
+        `${getBasePath()}/api/files`
+      )}/${newFileName}`,
       size: file.size,
       name: fileName,
       extension: fileExtension,
@@ -92,7 +96,10 @@ export async function uploadImageByFile(formData: FormData) {
   return {
     success: true,
     file: {
-      url: `${dirPath.replace("./public", "/api/files")}/${newFileName}`,
+      url: `${dirPath.replace(
+        "./public",
+        `${getBasePath()}/api/files`
+      )}/${newFileName}`,
     },
   };
 }
@@ -142,7 +149,10 @@ export async function uploadImageByUrl(formData: FormData) {
   return {
     success: true,
     file: {
-      url: `${dirPath.replace("./public", "/api/files")}/${newFileName}`,
+      url: `${dirPath.replace(
+        "./public",
+        `${getBasePath()}/api/files`
+      )}/${newFileName}`,
     },
   };
 }

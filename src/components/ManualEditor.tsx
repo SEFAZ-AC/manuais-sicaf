@@ -202,7 +202,7 @@ const ManualEditor = memo(function ManualEditor({
     }
   }, [data.slug, router]);
   return (
-    <>
+    <div className="my-6">
       <EditorResourcesTools
         resourceIsActive={data.active}
         resourceIsEditing={isEditing}
@@ -312,7 +312,7 @@ const ManualEditor = memo(function ManualEditor({
         deleteFunction={() => handleDelete()}
         cancelFunction={() => null}
       />
-    </>
+    </div>
   );
 });
 

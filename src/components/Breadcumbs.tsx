@@ -6,6 +6,7 @@ const Breadcrumbs = ({
 }: {
   item: {
     name: string;
+    updatedAt: Date;
     section: {
       name: string;
       module: {
@@ -41,7 +42,7 @@ const Breadcrumbs = ({
     icon: "file-text",
   });
   return (
-    <div className="text-xs breadcrumbs flex-none overflow-hidden">
+    <div className="hidden text-gray-500 text-sm breadcrumbs overflow-hidden 2xl:flex flex-col w-full">
       <ul>
         {crumbs.map((crumb, index) => (
           <li key={index} className="flex items-center gap-1">
@@ -50,6 +51,7 @@ const Breadcrumbs = ({
           </li>
         ))}
       </ul>
+      <div className="divider m-0 p-0"></div>
     </div>
   );
 };

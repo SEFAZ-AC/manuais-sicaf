@@ -4,12 +4,14 @@ import { revalidatePath } from "next/cache";
 import db from "../lib/db";
 
 export async function getHome() {
-  await db.page.update({
-    where: { slug: "/" },
-    data: {
-      views: { increment: 1 },
-    },
-  });
+  try {
+    await db.page.update({
+      where: { slug: "/" },
+      data: {
+        views: { increment: 1 },
+      },
+    });
+  } catch (e) {}
   return await db.page.findFirst({
     where: { slug: "/" },
     select: {
@@ -31,12 +33,14 @@ export async function getHome() {
 }
 
 export async function getPage(slug: string) {
-  await db.page.update({
-    where: { slug },
-    data: {
-      views: { increment: 1 },
-    },
-  });
+  try {
+    await db.page.update({
+      where: { slug },
+      data: {
+        views: { increment: 1 },
+      },
+    });
+  } catch (e) {}
   return await db.page.findFirst({
     where: { active: true, slug: slug },
     select: {
@@ -148,6 +152,7 @@ export async function adUpdateHome(newContent: string, userId: number) {
     data: {
       content: newContent,
       userId,
+      updatedAt: new Date(),
     },
   });
   revalidatePath("/");
@@ -179,6 +184,7 @@ export async function adUpdatePage(
       icon: newIcon,
       content: newContent,
       userId,
+      updatedAt: new Date(),
     },
   });
   revalidatePath("/");

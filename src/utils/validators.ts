@@ -5,7 +5,7 @@ export const loginSchema = z.object({
   password: z
     .string()
     .max(22, { message: "A senha deve possuir no máximo 22 caracteres" })
-    .min(6, { message: "A senha deve possuir no mínimo 8 caracteres" }),
+    .min(6, { message: "A senha deve possuir no mínimo 6 caracteres" }),
 });
 
 export const updateUserSchema = z
@@ -14,20 +14,20 @@ export const updateUserSchema = z
     avatar: z.string().optional(),
     oldPassword: z
       .string()
-      .min(1, { message: "A senha deve possuir entre 1 e 22 caracteres" })
+      .min(6, { message: "A senha deve possuir entre 6 e 22 caracteres" })
       .max(22)
       .optional()
       .or(z.literal("")),
     newPassword: z
       .string()
-      .min(1, { message: "A nova senha deve possuir entre 1 e 22 caracteres" })
+      .min(6, { message: "A nova senha deve possuir entre 6 e 22 caracteres" })
       .max(22)
       .optional()
       .or(z.literal("")),
     confirmNewPassword: z
       .string()
-      .min(1, {
-        message: "A confirmação de senha deve possuir entre 1 e 22 caracteres",
+      .min(6, {
+        message: "A confirmação de senha deve possuir entre 6 e 22 caracteres",
       })
       .max(22)
       .optional()

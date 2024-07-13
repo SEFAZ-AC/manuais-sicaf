@@ -21,12 +21,14 @@ export async function adGetTrees() {
 }
 
 export async function getArticle(slug: string) {
-  await db.article.update({
-    where: { slug },
-    data: {
-      views: { increment: 1 },
-    },
-  });
+  try {
+    await db.article.update({
+      where: { slug },
+      data: {
+        views: { increment: 1 },
+      },
+    });
+  } catch (e) {}
   return await db.article.findFirst({
     where: {
       active: true,
@@ -168,6 +170,7 @@ export async function adUpdateArticle(
       userId,
       moduleId: !newSectionId ? newModuleId : null,
       sectionId: newSectionId,
+      updatedAt: new Date(),
     },
   });
   revalidatePath("/");

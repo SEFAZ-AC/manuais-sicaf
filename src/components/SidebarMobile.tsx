@@ -13,7 +13,7 @@ const SidebarMobile = async () => {
       <Suspense fallback={<Loading />}>
         {session ? (
           <div className="flex flex-col gap-12">
-            <EditorModeTools mobile />
+            <EditorModeTools mobile admin={session.user.admin} />
             <AdminSidebarContent />
           </div>
         ) : (

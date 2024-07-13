@@ -87,7 +87,7 @@ const LoginForm = () => {
           color="primary"
         />
         <LinkButton
-          text="Voltar"
+          text="Home"
           icon={<DynamicIcon name="home" />}
           color="neutral"
           to="/"

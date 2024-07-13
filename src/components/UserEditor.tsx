@@ -13,6 +13,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdateUserSchema, updateUserSchema } from "@/utils/validators";
 import { useEffect, useState } from "react";
 import { uploadImageByFile } from "@/services/fileService";
+import { getBasePath } from "@/utils/getBasePath";
+import FormErrorMessage from "./FormErrorMessage";
 
 const UserEditor = ({
   user,
@@ -96,17 +98,17 @@ const UserEditor = ({
     }
   }, [newAvatar]);
   return (
-    <div className="hero min-h-[70vh]">
+    <div className="hero">
       <div className="hero-content flex-col items-center justify-center gap-12 xl:flex-row w-full md:max-w-[70%]">
         <div className="relative min-w-[300px] w-fit">
           {user.avatar || newAvatarURL ? (
             <Image
-              src={newAvatarURL || user.avatar!}
+              src={newAvatarURL || getBasePath() + user.avatar!}
               width={300}
               height={300}
               className="shadow-2xl avatar rounded-full aspect-square object-cover"
               alt="Seu avatar"
-              unoptimized={!!newAvatarURL}
+              unoptimized={true}
             />
           ) : (
             <GenericAvatarImage />
@@ -136,7 +138,6 @@ const UserEditor = ({
           </label>
           <input
             type="text"
-            autoFocus
             {...register("name")}
             className="input text-2xl font-bold w-full text-center xl:text-start"
           />
@@ -148,8 +149,13 @@ const UserEditor = ({
               <input
                 type="password"
                 {...register("oldPassword")}
-                className="input input-sm"
+                className="input input-sm mb-2"
               />
+              {errors.oldPassword?.message ? (
+                <FormErrorMessage message={errors.oldPassword.message} />
+              ) : (
+                ""
+              )}
             </label>
             <label className="form-control w-full">
               <div className="label">
@@ -158,8 +164,13 @@ const UserEditor = ({
               <input
                 type="password"
                 {...register("newPassword")}
-                className="input input-sm"
+                className="input input-sm mb-2"
               />
+              {errors.newPassword?.message ? (
+                <FormErrorMessage message={errors.newPassword.message} />
+              ) : (
+                ""
+              )}
             </label>
             <label className="form-control w-full">
               <div className="label">
@@ -168,8 +179,13 @@ const UserEditor = ({
               <input
                 type="password"
                 {...register("confirmNewPassword")}
-                className="input input-sm"
+                className="input input-sm mb-2"
               />
+              {errors.confirmNewPassword?.message ? (
+                <FormErrorMessage message={errors.confirmNewPassword.message} />
+              ) : (
+                ""
+              )}
             </label>
           </div>
           <div className="flex items-center justify-center gap-3 xl:justify-start mt-6">
