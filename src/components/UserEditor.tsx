@@ -12,7 +12,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdateUserSchema, updateUserSchema } from "@/utils/validators";
 import { useEffect, useState } from "react";
-import { uploadImageByFile } from "@/services/fileService";
+import { uploadAvatar } from "@/services/fileService";
 import { getBasePath } from "@/utils/getBasePath";
 import FormErrorMessage from "./FormErrorMessage";
 
@@ -53,7 +53,7 @@ const UserEditor = ({
       if (newAvatar) {
         const formData = new FormData();
         formData.append("file", newAvatar);
-        const res = await uploadImageByFile(formData);
+        const res = await uploadAvatar(formData);
         if (res.success) {
           data.avatar = res.file?.url;
         } else {

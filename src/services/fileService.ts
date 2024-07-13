@@ -64,6 +64,43 @@ export async function uploadFile(formData: FormData) {
   };
 }
 
+export async function uploadAvatar(formData: FormData) {
+  const file = formData.get("file") as File;
+  const fileName = file.name;
+  const mimeType = file.type;
+  const validMimeTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/svg+xml",
+  ];
+  const fileExtension = fileName.split(".").pop();
+  if (!validMimeTypes.includes(mimeType)) {
+    return {
+      success: false,
+      message: "Tipo inválido. Apenas imagens são aceitas.",
+    };
+  }
+  const data = await file.arrayBuffer();
+  const hash = crypto
+    .createHash("md5")
+    .update(fileName + Date.now().toString())
+    .digest("hex");
+  const newFileName = `${hash}.${fileExtension}`;
+  const dirPath = "./public";
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+  const filePath = `${dirPath}/${newFileName}`;
+  await fs.promises.writeFile(filePath, Buffer.from(data));
+  return {
+    success: true,
+    file: {
+      url: `${dirPath.replace("./public", "/api/files")}/${newFileName}`,
+    },
+  };
+}
+
 export async function uploadImageByFile(formData: FormData) {
   const file = formData.get("file") as File;
   const fileName = file.name;

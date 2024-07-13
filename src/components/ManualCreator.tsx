@@ -120,7 +120,7 @@ const ManualCreator = ({ trees }: { trees: any }) => {
         cancelFunction={() => router.back()}
         saveFunction={handleCreate}
       />
-      <div className="mb-6 collapse bg-base-300 collapse-plus break-all">
+      <div className="mb-6 collapse bg-base-300">
         <div className="border rounded-box border-primary">
           <div className="flex flex-col gap-3 p-3">
             <label className="input w-full flex items-center gap-2">

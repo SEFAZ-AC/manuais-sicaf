@@ -202,7 +202,7 @@ const ManualEditor = memo(function ManualEditor({
     }
   }, [data.slug, router]);
   return (
-    <div className="my-6">
+    <div className="my-6 !max-w-[100%]">
       <EditorResourcesTools
         resourceIsActive={data.active}
         resourceIsEditing={isEditing}
@@ -220,7 +220,7 @@ const ManualEditor = memo(function ManualEditor({
       />
       {isEditing ? (
         <div
-          className={`mb-6 collapse bg-base-300 collapse-plus break-all ${
+          className={`mb-6 bg-base-300  ${
             data.active || isEditing ? "" : "opacity-30"
           }`}
         >
@@ -243,7 +243,7 @@ const ManualEditor = memo(function ManualEditor({
                       ),
                     }))
                   }
-                  className="grow font-bold text-xl"
+                  className="font-bold text-xl overflow-auto"
                 />
               </label>
               <div className="flex flex-col xl:flex-row gap-3">
@@ -294,7 +294,7 @@ const ManualEditor = memo(function ManualEditor({
                   type="text"
                   value={manualToUpdate?.slug || ""}
                   disabled
-                  className="grow font-bold"
+                  className="font-bold"
                 />
               </label>
             </div>

@@ -41,7 +41,7 @@ const Manual = async ({ params }: { params: { slug?: string[] } }) => {
   if (!data) notFound();
   const trees = await adGetTrees();
   return (
-    <section className="flex flex-col items-start justify-start w-full h-ful px-3">
+    <section className="flex flex-col items-start justify-start w-full h-full px-3">
       <Breadcrumbs item={data} />
       <AuthorAndDateIdentification
         avatar={data.user.avatar}
