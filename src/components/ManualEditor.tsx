@@ -243,7 +243,7 @@ const ManualEditor = memo(function ManualEditor({
                       ),
                     }))
                   }
-                  className="font-bold text-xl overflow-auto"
+                  className="font-bold grow text-xl overflow-auto"
                 />
               </label>
               <div className="flex flex-col xl:flex-row gap-3">
@@ -294,7 +294,7 @@ const ManualEditor = memo(function ManualEditor({
                   type="text"
                   value={manualToUpdate?.slug || ""}
                   disabled
-                  className="font-bold"
+                  className="grow font-bold"
                 />
               </label>
             </div>
