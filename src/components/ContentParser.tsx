@@ -175,7 +175,7 @@ const Embed = ({ data }: { data: EmbedData }) => {
 
 const Article = ({ blocks }: { blocks: Block[] }) => {
   return (
-    <div className="w-full h-full my-6 flex flex-col gap-2 leading-loose">
+    <div className="content-parser-wrapper w-full h-full my-6 flex flex-col gap-2 leading-loose">
       {blocks.map((block) => {
         switch (block.type) {
           case "paragraph":
