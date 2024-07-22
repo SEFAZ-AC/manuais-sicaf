@@ -17,6 +17,7 @@ import {
   uploadImageByFile,
   uploadImageByUrl,
 } from "@/services/fileService";
+import PathBlock from "@/lib/editorJsPathPlugin";
 
 const RenderEditor = (
   elementId: string,
@@ -31,34 +32,7 @@ const RenderEditor = (
         holder: elementId,
         tools: {
           embed: Embed,
-          delimiter: Delimiter,
-          quote: {
-            class: Quote,
-            inlineToolbar: true,
-            config: {
-              quotePlaceholder: "Enter a quote",
-              captionPlaceholder: "Quote's author",
-            },
-          },
-          marker: {
-            class: Marker,
-          },
-          table: {
-            class: Table,
-            inlineToolbar: true,
-            config: {
-              rows: 2,
-              cols: 3,
-            },
-          },
-          warning: {
-            class: Warning,
-            inlineToolbar: true,
-            config: {
-              titlePlaceholder: "Alert title",
-              messagePlaceholder: "Alert message",
-            },
-          },
+          path: PathBlock,
           header: {
             class: Header,
             inlineToolbar: true,
@@ -72,31 +46,6 @@ const RenderEditor = (
             inlineToolbar: true,
             config: {
               defaultStyle: "unordered",
-            },
-          },
-          attaches: {
-            class: AttachesTool,
-            config: {
-              uploader: {
-                uploadByFile: async (file: File) => {
-                  try {
-                    const formData = new FormData();
-                    formData.append("file", file!);
-                    const res = await uploadFile(formData);
-                    if (res.success) {
-                      return res;
-                    } else {
-                      return Promise.reject({
-                        error: "Não foi possível fazer o upload do arquivo ",
-                      });
-                    }
-                  } catch (e: any) {
-                    return Promise.reject({
-                      error: "Não foi possível fazer o upload do arquivo ",
-                    });
-                  }
-                },
-              },
             },
           },
           image: {
@@ -142,6 +91,60 @@ const RenderEditor = (
               },
             },
           },
+          delimiter: Delimiter,
+          quote: {
+            class: Quote,
+            inlineToolbar: true,
+            config: {
+              quotePlaceholder: "Digite uma citação",
+              captionPlaceholder: "Autor ou referência da citação",
+            },
+          },
+          warning: {
+            class: Warning,
+            inlineToolbar: true,
+            config: {
+              titlePlaceholder: "Título do alerta",
+              messagePlaceholder: "Mensagem do alerta",
+            },
+          },
+          marker: {
+            class: Marker,
+          },
+          table: {
+            class: Table,
+            inlineToolbar: true,
+            config: {
+              rows: 2,
+              cols: 3,
+            },
+          },
+          attaches: {
+            class: AttachesTool,
+            config: {
+              errorMessage: "Erro ao carregar arquivo...",
+              uploader: {
+                uploadByFile: async (file: File) => {
+                  try {
+                    const formData = new FormData();
+                    formData.append("file", file!);
+                    const res = await uploadFile(formData);
+                    if (res.success) {
+                      return res;
+                    } else {
+                      return Promise.reject({
+                        error: "Não foi possível fazer o upload do arquivo ",
+                      });
+                    }
+                  } catch (e: any) {
+                    return Promise.reject({
+                      error: "Não foi possível fazer o upload do arquivo ",
+                    });
+                  }
+                },
+              },
+            },
+          },
         },
         placeholder: "Comece a escrever aqui...",
         data: data ? JSON.parse(data) : {},
@@ -152,6 +155,75 @@ const RenderEditor = (
               setData(JSON.stringify(outputData));
             })
             .catch((error) => {});
+        },
+        i18n: {
+          messages: {
+            ui: {
+              blockTunes: {
+                toggler: {
+                  "Click to tune": "Clique para ajustar",
+                },
+              },
+              inlineToolbar: {
+                converter: {
+                  convertTo: "Converter para",
+                },
+              },
+              toolbar: {
+                toolbox: {
+                  add: "Adicionar",
+                  filter: "Filtrar",
+                },
+              },
+            },
+            toolNames: {
+              Text: "Texto",
+              Heading: "Cabeçalho",
+              List: "Lista",
+              Warning: "Alerta",
+              Quote: "Citação",
+              Delimiter: "Delimitador",
+              Table: "Tabela",
+              Link: "Link",
+              Marker: "Marcador",
+              Bold: "Negrito",
+              Italic: "Itálico",
+              Image: "Imagem",
+              Attaches: "Anexos",
+            },
+            tools: {
+              image: {
+                "Select an Image": "Carregar uma imagem...",
+                Caption: "Legenda",
+              },
+              attaches: {
+                "Select file to upload": "Carregar um arquivo...",
+              },
+              warning: {
+                Title: "Título",
+                Message: "Mensagem",
+              },
+              link: {
+                "Add a link": "Adicionar um link",
+              },
+              stub: {
+                "The block can not be displayed correctly.":
+                  "O bloco não pode ser exibido corretamente.",
+              },
+            },
+            blockTunes: {
+              delete: {
+                Delete: "Deletar",
+                "Click to delete": "Clique para deletar",
+              },
+              moveUp: {
+                "Move up": "Mover para cima",
+              },
+              moveDown: {
+                "Move down": "Mover para baixo",
+              },
+            },
+          },
         },
       });
     } else {

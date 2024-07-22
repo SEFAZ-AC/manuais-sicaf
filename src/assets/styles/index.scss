@@ -238,7 +238,8 @@ mark {
   }
 }
 
-.paragraph a {
+.content-parser-wrapper a,
+.content-parser-wrapper * a {
   text-decoration: underline;
   &:hover {
     color: #048d3e;
