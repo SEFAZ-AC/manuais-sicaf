@@ -173,6 +173,25 @@ const Embed = ({ data }: { data: EmbedData }) => {
   );
 };
 
+const Path = ({ data }: { data: { items: string[] } }) => (
+  <div className="my-4">
+    <h3 className="text-2xl font-bold">Caminho:</h3>
+    <div className="flex items-center gap-3 p-3 my-3 flex-wrap">
+      {data.items.map((item, index) => (
+        <div className="flex items-center gap-2" key={index}>
+          <span className="font-medium indicator border border-gray-300 p-2 rounded-xl shadow-md my-2">
+            <span className="font-light indicator-item indicator-center badge badge-primary text-white text-xs">
+              {index + 1}
+            </span>
+            {item}
+          </span>
+          {index < data.items.length - 1 && <DynamicIcon name="arrow-right" />}
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
 const Article = ({ blocks }: { blocks: Block[] }) => {
   return (
     <div className="content-parser-wrapper w-full h-full my-6 flex flex-col gap-2 leading-loose">
@@ -202,6 +221,10 @@ const Article = ({ blocks }: { blocks: Block[] }) => {
             return <ImageBlock key={block.id} data={block.data as ImageData} />;
           case "embed":
             return <Embed key={block.id} data={block.data as EmbedData} />;
+          case "path":
+            return (
+              <Path key={block.id} data={block.data as { items: string[] }} />
+            );
           default:
             return null;
         }
