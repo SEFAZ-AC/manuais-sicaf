@@ -38,7 +38,7 @@ const TopBar = async () => {
                 color="ghost"
                 icon={<DynamicIcon name="phone" />}
                 size="xs"
-                to="https://wa.me/5568992315316"
+                to="https://wa.me/556832152145"
                 openInNewTab
               />
             </li>
